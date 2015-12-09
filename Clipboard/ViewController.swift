@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var texFieldButtton: UIButton!
     
+    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +41,17 @@ class ViewController: UIViewController {
     
     func showAlertView(){
         let pasteBoard = UIPasteboard.generalPasteboard().string
-        let alert = UIAlertController(title: "alert", message: ""+pasteBoard!+""+" was copied into clipboard", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "alert", message: "''"+pasteBoard!+"''"+" was copied into clipboard", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(cancelAction)
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
     
     @IBAction func textFieldButton(sender: AnyObject) {
-        print(textField.text)
+        let pasteBoard = UIPasteboard.generalPasteboard().string
+        let alert = UIAlertController(title: "alert", message: "value in clipboard is: \n"+"''"+pasteBoard!+"''"+"\n value in textfield is: \n"+"''"+textField.text!+"''", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 }
